@@ -30,6 +30,24 @@ const questions = [
     }
 ];
 //this is the waiting for the server to run, and the prompts to be answered and this will be stored in the response const.
-(async () => {
-    const response = await prompts(questions);
-  })();
+// (async () => {
+//     const response = await prompts(questions);
+//   })();
+
+  async function createSVGFile() {
+    try {
+      const response = await prompts(questions);
+  
+      // Use response data to create an SVG
+      const svgContent = createSvg(response);
+  
+      // Write SVG content to a file named 'logo.svg'
+      fs.writeFileSync('logo.svg', svgContent);
+  
+      console.log('Generated logo.svg');
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+  
+  createSVGFile();
